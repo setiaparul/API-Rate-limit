@@ -1,0 +1,25 @@
+[
+    {
+        "api":"/api/v1/organizations",
+        "limit" : "100"
+    },{
+        "api":"/api/v1/developers",
+        "limit" : "100"
+    },{
+        "userId":"user1",
+        "api":"/api/v1/developers",
+        "limit" : "100"
+    },{
+        "userId":"user1",
+        "api":"/api/v1/organizations",
+        "limit" : "100"
+    },{
+        "userId":"user2",
+        "api":"/api/v1/developers",
+        "limit" : "100"
+    },{
+    "userId":"user2",
+    "api":"/api/v1/organizations",
+    "limit" : "100"
+    }
+]
