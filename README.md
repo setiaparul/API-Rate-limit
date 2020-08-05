@@ -3,6 +3,10 @@ High Level Diagram
 
 
 High Level Diagram for Rate Limit: 
+
+
+![image](https://user-images.githubusercontent.com/8611287/89461438-9ba51480-d789-11ea-90d4-f4eb3c7f61a6.png)
+
 Rate Limiter will be responsible for deciding which request will be served by the API servers and
 which request will be declined.
 
@@ -17,14 +21,14 @@ Sequence Diagram for some scenarios :
 
 Let’s assume our rate limiter is allowing three requests per minute per user, so whenever a new request
 comes in, our rate limiter will perform the following steps:
-1.If the ‘UserID’ is not present in the configuration file, then default rate Limit value of the API is set and fetch the default object related with Api from Redis.
-2. Otherwise find the record associated with the user from Redis.
-3. We check the peek element from queue which is present in object, and calculate deltaTime(curentTime - timeStamp over peek object in queue). If deltaTime is greater than thresholdLimitTime , then we dequeue that object . We continue this , till we found element which has delta time less than n thresholdLimitTime . 
-In this case we are allowing 3 request/min
-Then our thresholdLimitTime is 1 min.
-4.We check the size of queue , if size is less than rateLimit number for that user , we insert element in queue and notifies the web-service to accept the request otherwise notifies the web-service to reject the request.
-5. Also I have tried to take here threadsafe queue , i.e ConcurrentLinkedQueue , to make it thread safe.
-
+    • If the ‘UserID’ is not present in the configuration file, then default rate Limit value of the API is set and fetch the default object related with Api from Redis.
+    • Otherwise find the record associated with the user from Redis.
+    • We check the peek element from queue which is present in object, and calculate deltaTime(curentTime - timeStamp over peek object in queue). If deltaTime is greater than thresholdLimitTime , then we dequeue that object . We continue this , till we found element which has delta time less than n thresholdLimitTime . 
+      In this case we are allowing 3 request/min
+      Then our thresholdLimitTime is 1 min.
+    • We check the size of queue , if size is less than rateLimit number for that user , we insert element in queue and notifies the web-service to accept the request otherwise notifies the web-service to reject the request.
+    • Also I have tried to take here threadsafe queue , i.e ConcurrentLinkedQueue , to make it thread safe.
+![image](https://user-images.githubusercontent.com/8611287/89461414-8e882580-d789-11ea-91b3-38f3a1d305fe.png)
 
 
 
